@@ -10,6 +10,7 @@ import seaborn as sns
 print(sns.__version__)
 data = pd.read_csv("wdi_wide.csv")
 
+#Part 3 – Understanding and preparing the data
 #Answer the question: how many empty values for the column “Physicians” and “Population”?
 print("Missing values in Physicians:", data["Physicians"].isnull().sum())
 print("Missing values in Population:", data["Population"].isnull().sum())
@@ -21,7 +22,6 @@ print(data.describe())
 # Add a new column for GNI per capita
 data["GNI per capita"] = data["GNI"] / data["Population"]
 data["GNI per capita"] = data["GNI per capita"].round(2)
-# A
 # a) Count how many countries are in each region
 print(data["Region"].value_counts())
 # b) How many high income economies are there?
@@ -38,6 +38,36 @@ for i in range(len(data)):
         countries_over_80.append(data["Country Name"][i])
 print("Number of countries where women live more than 80 years:", len(countries_over_80))
 print("Countries:", countries_over_80)
+
+#Part 4 - Visualizing statistical relationships
+import matplotlib.pyplot as plt
+
+# Scatter plot for females
+sns.relplot(
+    data=data,
+    x="GNI per capita",
+    y="Life expectancy, female",
+    kind="scatter",
+    height=5,
+    aspect=1.3)
+plt.title("GNI per Capita vs Life expectancy, female")
+plt.xlabel("GNI per Capita (USD)")
+plt.ylabel("Life Expectancy (Female, years)")
+plt.grid(True)
+plt.show()
+# Scatter plot for males
+sns.relplot(
+    data=data,
+    x="GNI per capita",
+    y="Life expectancy, male",
+    kind="scatter",
+    height=5,
+    aspect=1.3)
+plt.title("GNI per Capita vs Life expectancy, male")
+plt.xlabel("GNI per Capita (USD)")
+plt.ylabel("Life Expectancy (Male, years)")
+plt.grid(True)
+plt.show()
 
 
 
