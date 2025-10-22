@@ -29,8 +29,15 @@ print(data["High Income Economy"].value_counts())
 # Where are the high income economies (per region)?
 table = pd.crosstab(data["Region"], data["High Income Economy"])
 print(table)
+# Create empty lists
+countries_over_80 = []
 
-
+# Loop through the dataset row by row
+for i in range(len(data)):
+    if data["Life expectancy, female"][i] > 80:
+        countries_over_80.append(data["Country Name"][i])
+print("Number of countries where women live more than 80 years:", len(countries_over_80))
+print("Countries:", countries_over_80)
 
 
 
