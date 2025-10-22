@@ -21,7 +21,8 @@ print(data.describe())
 # Add a new column for GNI per capita
 data["GNI per capita"] = data["GNI"] / data["Population"]
 data["GNI per capita"] = data["GNI per capita"].round(2)
-
+# Count how many countries are in each region
+print(data["Region"].value_counts())
 
 
 
