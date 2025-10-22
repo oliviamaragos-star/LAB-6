@@ -15,6 +15,8 @@ print("Missing values in Physicians:", data["Physicians"].isnull().sum())
 print("Missing values in Population:", data["Population"].isnull().sum())
 
 print(data.nunique())
+#Get descriptive statistics for all numeric columns
+print(data.describe())
 
 
 
