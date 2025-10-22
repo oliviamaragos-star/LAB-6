@@ -26,7 +26,9 @@ data["GNI per capita"] = data["GNI per capita"].round(2)
 print(data["Region"].value_counts())
 # b) How many high income economies are there?
 print(data["High Income Economy"].value_counts())
-
+# Where are the high income economies (per region)?
+table = pd.crosstab(data["Region"], data["High Income Economy"])
+print(table)
 
 
 
