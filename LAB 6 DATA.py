@@ -14,9 +14,14 @@ data = pd.read_csv("wdi_wide.csv")
 print("Missing values in Physicians:", data["Physicians"].isnull().sum())
 print("Missing values in Population:", data["Population"].isnull().sum())
 
+#nunique counts how many different entries exist per column.
 print(data.nunique())
 #Get descriptive statistics for all numeric columns
 print(data.describe())
+# Add a new column for GNI per capita
+data["GNI per capita"] = data["GNI"] / data["Population"]
+data["GNI per capita"] = data["GNI per capita"].round(2)
+
 
 
 
