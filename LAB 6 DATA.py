@@ -164,3 +164,33 @@ plt.xlabel("GNI per Capita (USD)")
 plt.ylabel("Life Expectancy (Male, years)")
 plt.grid(True)
 plt.show()
+
+#Part 5 ----------------------------------------------------
+data_melted = pd.melt(
+    data, 
+    id_vars=["Country Name", "Region", "GNI per capita", "Health expenditure" ,
+             "Physicisans" , "CO2 emissions (metric tons per capita)",
+             "Internet use","Population"],
+    value_vars=["life expectancy, female", "Life expectancy, male"],
+    var_name="Gender", 
+    value_name="Life Expectancy"
+    )
+# Simplify gender labels 
+data_melted["Gender"] = data_melted["Gender"].str.replace("Life expectancy,","")
+
+#Question 1
+#Is life expectancy related to health expenditure?
+sns.relplot(
+    data=data_melted,
+    x="Health expenditure",
+    y="Life Expectancy",
+    col="Gender",
+    kind="scatter",
+    height=5,
+    aspect=1
+)
+plt.suptitle("Life Expectancy vs Health Expenditure by Gender", y=1.05)
+plt.show()
+
+
+
