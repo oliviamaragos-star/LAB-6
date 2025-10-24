@@ -192,5 +192,62 @@ sns.relplot(
 plt.suptitle("Life Expectancy vs Health Expenditure by Gender", y=1.05)
 plt.show()
 
+#Question 2 
+# Is life expenctancy related to the number of physicians? 
+sns.relplot(
+    data=data_melted,
+    x="Physicians",
+    y="Life Expectancy",
+    col="Gender",
+    kind="scatter",
+    height=5,
+    aspect=1
+)
+plt.suptitle("Life Expectancy vs Number of Physicians by Gender", y=1.05)
+plt.show()
+
+#Question 3
+#Does Interpret use influence life expenctancy?
+sns.relplot(
+    data=data_melted,
+    x="Interpret use",
+    y="Life Expectancy",
+    col="Gender",
+    kind="scatter",
+    height=5,
+    aspect=1
+)
+plt.suptitle("Life Expectancy vs Internet USe by Gender", y=1.05)
+plt.show()
+
+#Question 4 
+#Does CO2 emissions affect life expectancy?
+sns.relplot(
+    data=data_melted,
+    x="CO2 emissions (metric tons per capita)",
+    y="Life Expectancy",
+    col="Gender",
+    kind="scatter",
+    height=5,
+    aspect=1
+)
+plt.suptitle("Life Expectancy vs CO2 Emissions by Gender", y=1.05)
+plt.show()
+
+#Question 5
+#Is population size related to life expectancy?
+sns.relplot(
+    data=data_melted,
+    x="Population",
+    y="Life Expectancy",
+    col="Gender",
+    kind="scatter",
+    height=5,
+    aspect=1
+)
+plt.suptitle("Life Expectancy vs Population by Gender", y=1.05)
+plt.show()
+
+
 
 
