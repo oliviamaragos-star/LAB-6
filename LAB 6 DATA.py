@@ -293,6 +293,19 @@ plt.title("Variation of CO2 Emissions by Region")
 plt.xticks(rotation=45)
 plt.show()
 
+#d) Do all high income economies have high emissions?
+sns.boxplot(
+    data=data,
+    x="High Income Economy",
+    y="CO2 emissions (metric tons per capita)")
+plt.title("Co2 Emissions in HUgh vs Non-High Income Economies")
+plt.xlabel("HIgh Income Economy (Yes/No)")
+plt.ylabel("CO2 Emissions (metric tons per capita)")
+plt.show()
+
+print("Means CO2 emissions by income group:")
+print(data.groupby("High Income Economy")["CO2 emissions (metric tons per capita)"].mean())
+
 
 
 
