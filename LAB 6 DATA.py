@@ -7,8 +7,8 @@ Created on Wed Oct 22 16:21:56 2025
 
 import pandas as pd
 import seaborn as sns
-print(sns.__version__)
-data = pd.read_csv("wdi_wide.csv")
+print(sns.__version__) #check seaborn version to ensure compatibility 
+data = pd.read_csv("wdi_wide.csv") #loading the data set into a pandas DataFrame
 
 # ----------------------------------------------------------
 #Part 3 – Understanding and preparing the data
@@ -40,11 +40,15 @@ for i in range(len(data)):
 print("Number of countries where women live more than 80 years:", len(countries_over_80))
 print("Countries:", countries_over_80)
 
+#this part loads the dataset, checks for missing or unique values, and
+#creates new variables like GNI per capita to prepare the data for analysis.
+
 # ----------------------------------------------------------
 #Part 4 - Visualizing statistical relationships
 import matplotlib.pyplot as plt
 
 # Scatter plot for females
+#Use of replot() to visualize GNI per capita vs life expectancy for females
 sns.relplot(
     data=data,
     x="GNI per capita",
@@ -57,7 +61,7 @@ plt.xlabel("GNI per Capita (USD)")
 plt.ylabel("Life Expectancy (Female, years)")
 plt.grid(True)
 plt.show()
-# Scatter plot for males
+# Same plot for males to compare both genders 
 sns.relplot(
     data=data,
     x="GNI per capita",
@@ -71,13 +75,13 @@ plt.ylabel("Life Expectancy (Male, years)")
 plt.grid(True)
 plt.show()
 # ----------------------------------------------------------
-#Step 1: relplot() with color by Region
+#Step 1: added color (hue) to show regions for better comparison
 # Female life expectancy by region
 sns.relplot(
     data=data,
     x="GNI per capita",
     y="Life expectancy, female",
-    hue="Region",             # color-coded by region
+    hue="Region",             
     kind="scatter",
     height=5,
     aspect=1.3)
@@ -86,7 +90,8 @@ plt.xlabel("GNI per Capita (USD)")
 plt.ylabel("Life Expectancy (Female, years)")
 plt.grid(True)
 plt.show()
-# Male life expancy by region 
+
+#Same region based plot for males  
 sns.relplot(
     data=data,
     x="GNI per capita",
@@ -100,7 +105,7 @@ plt.xlabel("GNI per Capita (USD)")
 plt.ylabel("Life Expectancy (Male, years)")
 plt.grid(True)
 plt.show()
-#Step 2: relplot() with Lines and Standard Deviation
+#Step 2:USed line plot with standard deviation (ci="sd" to see trends by region
 #For women
 sns.relplot(
     data=data,
@@ -165,7 +170,11 @@ plt.ylabel("Life Expectancy (Male, years)")
 plt.grid(True)
 plt.show()
 
+#This part explores the relationship between a country's income level,
+#(GNI per capita) and life expectancy, with separate plots for men and women.
+
 #Part 5 ----------------------------------------------------
+#Use of pd.melt() to reshape the data for gender comparision side by side
 data_melted = pd.melt(
     data, 
     id_vars=["Country Name", "Region", "GNI per capita", "Health expenditure" ,
@@ -174,7 +183,7 @@ data_melted = pd.melt(
     value_vars=["life expectancy, female", "Life expectancy, male"],
     var_name="Gender", 
     value_name="Life Expectancy")
-# Simplify gender labels 
+# simplified gender labels to make the graph cleaner  
 data_melted["Gender"] = data_melted["Gender"].str.replace("Life expectancy,","")
 
 #Question 1
@@ -247,9 +256,13 @@ sns.relplot(
 plt.suptitle("Life Expectancy vs Population by Gender", y=1.05)
 plt.show()
 
+#This part analyzes how various social and health factors such as health expenditure,
+#number of physicians, and Internet use affect life expectancy across countries.
+
 
 #Part 6 -----------------------------------------
 #a) Is there any association between internet use and emissionsper capita ?
+#USe of lmplot() to check correlation between Internet use and CO2 emissions
 sns.lmplot(
     data=data,
     x="Internet Use",
@@ -257,7 +270,7 @@ sns.lmplot(
     hue="Region",
     height=5,
     aspect=1.3,
-    scatter_kws={"alpha":0.6})
+    scatter_kws={"alpha":0.6}) #adds alinear regression line fro trend visualization
 
 plt.title("Association between Internet Use and CO2 Emissions per Capita")
 plt.xlabel("Internet Use (% of population)")
@@ -275,7 +288,7 @@ sns.relplot (data=data,
              x="Internet use",
              y="CO2 emissions (metric tons per capita)",
              hue="Region",
-             kind="scatter",
+             kind="scatter", # visualizes how emissions vary across regions 
              height=5,
              aspect=1.3)
 
@@ -297,7 +310,7 @@ plt.show()
 sns.boxplot(
     data=data,
     x="High Income Economy",
-    y="CO2 emissions (metric tons per capita)")
+    y="CO2 emissions (metric tons per capita)") # shows income-based difference in emissions
 plt.title("Co2 Emissions in HUgh vs Non-High Income Economies")
 plt.xlabel("HIgh Income Economy (Yes/No)")
 plt.ylabel("CO2 Emissions (metric tons per capita)")
@@ -305,6 +318,10 @@ plt.show()
 
 print("Means CO2 emissions by income group:")
 print(data.groupby("High Income Economy")["CO2 emissions (metric tons per capita)"].mean())
+
+#This section examines how Internet use related to CO2 emissions per capita.
+#It identifies high-emissions countries, comapre emissions by region and incomes,
+#and highlights global environmental and economic patterns.
 
 
 
