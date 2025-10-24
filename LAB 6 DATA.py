@@ -173,8 +173,7 @@ data_melted = pd.melt(
              "Internet use","Population"],
     value_vars=["life expectancy, female", "Life expectancy, male"],
     var_name="Gender", 
-    value_name="Life Expectancy"
-    )
+    value_name="Life Expectancy")
 # Simplify gender labels 
 data_melted["Gender"] = data_melted["Gender"].str.replace("Life expectancy,","")
 
@@ -201,8 +200,8 @@ sns.relplot(
     col="Gender",
     kind="scatter",
     height=5,
-    aspect=1
-)
+    aspect=1)
+
 plt.suptitle("Life Expectancy vs Number of Physicians by Gender", y=1.05)
 plt.show()
 
@@ -229,8 +228,8 @@ sns.relplot(
     col="Gender",
     kind="scatter",
     height=5,
-    aspect=1
-)
+    aspect=1)
+
 plt.suptitle("Life Expectancy vs CO2 Emissions by Gender", y=1.05)
 plt.show()
 
@@ -243,10 +242,80 @@ sns.relplot(
     col="Gender",
     kind="scatter",
     height=5,
-    aspect=1
-)
+    aspect=1)
+
 plt.suptitle("Life Expectancy vs Population by Gender", y=1.05)
 plt.show()
+
+
+#Part 6 -----------------------------------------
+#a) Is there any association between internet use and emissionsper capita ?
+sns.lmplot(
+    data=data,
+    x="Internet Use",
+    y="CO2 emissions (metric tons per capita)",
+    hue="Region",
+    height=5,
+    aspect=1.3,
+    scatter_kws={"alpha":0.6})
+
+plt.title("Association between Internet Use and CO2 Emissions per Capita")
+plt.xlabel("Internet Use (% of population)")
+plt.ylabel("CO2 Emissions (metric tons per capita)")
+plt.grid(True)
+plt.show()
+
+#b) Which are the countries with higher emissions (> 0.03)?
+high_emissions = data[data["Co2 emissions (metric tons per capita)"] > 0.03]
+print (high_emissions[["Country Name", "Region","CO2 emissions (metric tons per capita)"]])
+print (high_emissions [["Country Name", "Region","CO2 emission (metric tons per capita)"]])
+
+#c) Is there much variation by region (high emissions vs Internet Use)?
+sns.relplot (data=data,
+             x="Internet use",
+             y="CO2 emissions (metric tons per capita)",
+             hue="Region",
+             kind="scatter",
+             height=5,
+             aspect=1.3)
+
+plt.title("Internet USe vs CO2 Emissions by Region")
+plt.xlabel("Internet USe (% of population)")
+plt.ylabel("CO2 Emissions (metric tons per capita)")
+plt.grid(True)
+plt.show()
+
+sns.boxplot(
+    data=data,
+    x="Region",
+    y="CO2 emissions (metric tons per capita)")
+plt.title("Variation of CO2 Emissions by Region")
+plt.xticks(rotation=45)
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
